@@ -11,9 +11,12 @@ public class Trominoes {
 	public static int nStart;
 	
 	public static void main(String[] args){
+		//test
 		UI.println("Trominoes:");
 		
+		//size of board
 		nStart = Integer.parseInt(args[0]);
+		//position of blank square
 		int x = Integer.parseInt(args[1]);
 		int y = Integer.parseInt(args[2]);
 		int[] l = {x,y};
