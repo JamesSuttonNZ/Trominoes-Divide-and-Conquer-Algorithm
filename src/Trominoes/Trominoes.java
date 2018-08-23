@@ -44,6 +44,8 @@ public class Trominoes {
 			UI.println("please enter a valid number");
 			y = UI.askInt("y (0-"+(boardSize-1)+") : ");
 		}
+		//set blank square coords
+		int[] blankSquare = {x,y};
 		
 		UI.println("\nTrominoes:");
 		
@@ -56,7 +58,7 @@ public class Trominoes {
 		//int x = Integer.parseInt(args[1]);
 		//int y = Integer.parseInt(args[2]);
 		
-		int[] blankSquare = {x,y};
+		
 		
 		//bottom left coordinates of the lower left quadrant of board
 		int[] bl_LL = {0,0};
@@ -71,6 +73,13 @@ public class Trominoes {
 		UI.fillRect(x*ts, (height-ts)-y*ts, ts, ts);
 	}
 
+	
+	/**
+	 * Recursive divide and conquer tromino tiling algorithm
+	 * @param boardSize - height(or width)
+	 * @param blankSquare - coords
+	 * @param bl_LL - bottom left coords of lower left quadrant
+	 */
 	private static void tile(int boardSize, int[] blankSquare, int[] bl_LL) {
 		if(boardSize == 2){
 			tileWithT(blankSquare);
@@ -79,8 +88,11 @@ public class Trominoes {
 		subBoards(boardSize, blankSquare, bl_LL);
 	}
 
+	/**
+	 * Tiles a 2x2 board with one missing square
+	 * @param blankSquare - coords
+	 */
 	private static void tileWithT(int[] blankSquare) {
-		
 		if((blankSquare[0] % 2) == 0 && (blankSquare[1] % 2) == 0){ // both even UR tromino
 			UI.println((blankSquare[0]+1)+" "+(blankSquare[1]+1)+" UR");
 			drawUR((blankSquare[0]+1),(blankSquare[1]+1));
@@ -103,10 +115,10 @@ public class Trominoes {
 	}
 
 	/**
-	 * 
-	 * @param boardSize
-	 * @param blankSquare
-	 * @param bl_LL
+	 * Divide board into sub-boards and tile
+	 * @param boardSize - height(or width)
+	 * @param blankSquare - coords
+	 * @param bl_LL - bottom left coords of lower left quadrant
 	 */
 	private static void subBoards(int boardSize, int[] blankSquare, int[] bl_LL) {
 		//divide board into four quadrants
